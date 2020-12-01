@@ -42,5 +42,9 @@ reduce(day1_part1(nums, 2020), `*`)
 
 ### part 2
 
-map(1:length(nums),
-    ~day1_part1)
+try_all_3s <- map(1:length(nums), ~day1_part1(nums[-.x], 2020 - nums[[.x]]))
+
+which_worked <- map_lgl(try_all_3s, ~!is.na(.x[1])) %>% which() %>% min()
+
+ans2 <- c(nums[which_worked], try_all_3s[[which_worked]])
+reduce(ans2, `*`)
