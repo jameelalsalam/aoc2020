@@ -25,17 +25,22 @@ which(num1 == nums) != which(num2 == nums)
 
 # as a function
 
-puzzle1 <- function(nums) {
+day1_part1 <- function(nums, total) {
 
-  diff <- 2020 - nums
+  diff <- total - nums
 
   in_there <- map_lgl(diff, ~.x %in% nums)
 
   num2 <- nums[min(which(in_there))]
-  num1 <- 2020 - num2
+  num1 <- total - num2
 
-  ans <- num1 * num2
-  ans
+  # list of numbers for answer:
+  c(num1, num2)
 }
 
-puzzle1(nums)
+reduce(day1_part1(nums, 2020), `*`)
+
+### part 2
+
+map(1:length(nums),
+    ~day1_part1)
